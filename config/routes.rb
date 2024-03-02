@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get 'pages/about'
   root "pages#homepage"
 
 
-  resources :ideas
+  resources :ideas, only: [:show, :index]
   resources :ideas do
     resources :comments
   end
